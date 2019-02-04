@@ -124,11 +124,6 @@ fetch(url)
 
         /* append it all together to the body */
         body.appendChild(modalContainer);
-
-        const cards = Array.from(document.querySelectorAll('.cards'));
-        cards.addEventListener('click', (e) => {
-            consle.log(e.target.value);
-        });
         
     });
 });
