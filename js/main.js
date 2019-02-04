@@ -127,6 +127,13 @@ fetch(url)
         
     });
 });
+
+gallery.addEventListener('click', (e) => {
+    console.log(e.target.className);
+    const modals = Array.from(document.querySelectorAll('.modal'));
+    console.log(modals);
+
+});
 //     // IMPORTANT: Below is only for exceeds tasks 
 //     <div class="modal-btn-container">
 //         <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
