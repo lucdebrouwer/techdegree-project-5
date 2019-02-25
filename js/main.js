@@ -122,3 +122,5 @@ gallery.addEventListener('click', (e) => {
     }
   
 });
+
+fetchdata();
