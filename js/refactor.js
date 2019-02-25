@@ -1,8 +1,3 @@
-/* Techdegree project 5  Random Employee directory
-author: Luc de Brouwer
-startProject: 3-2-2019
-*/
-
 const gallery = document.querySelector('#gallery');
 const body = document.getElementsByTagName('body')[0];
 
