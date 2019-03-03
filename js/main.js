@@ -5,7 +5,6 @@ startProject: 3-2-2019
 
 const gallery = document.querySelector('#gallery');
 const body = document.getElementsByTagName('body')[0];
-
 const url = 'https://randomuser.me/api/?results=12';
 
 // Fetch the random users from the random user api 
@@ -38,7 +37,7 @@ const makeElement = (element, value, text) => {
 
 /**
  * ForEach returned user in results array, create a card
- * @param {ImageBitmap} image 
+ * @param {string} image 
  * @param {string} firstname 
  * @param {string} lastname 
  * @param {string} email 
@@ -71,7 +70,22 @@ const createCards = (image, firstname, lastname, email, city, state) => {
     gallery.appendChild(card);
 }
 
-const createModals = (image, firstname, lastname, email, birthday, street, phone, city, state, postcode) => {
+
+/**
+ * Create modals that belong to the user card
+ * @param {string} image 
+ * @param {string} firstname 
+ * @param {string} lastname 
+ * @param {string} email 
+ * @param {string} birthday 
+ * @param {string} street 
+ * @param {string} phone 
+ * @param {string} city 
+ * @param {string} state 
+ * @param {string} postcode 
+ * @returns Modal with user information
+ */
+const createModals = (image, firstname, lastname, email, birthday, street, phone, city, state, postcode) => {;
     const modalContainer = makeElement('div', 'modal-container', null);
     const modal = makeElement('div', 'modal', null);
     const modalInfoContainer = makeElement('div', 'modal-info-container', null);
@@ -83,7 +97,7 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     const modalCity = makeElement('p', 'modal-text cap', `${city} ${state}`);
     const modalHr = makeElement('hr', '', null);
     const modalPhone = makeElement('p', 'modal-text', phone);
-    const modalAddress = makeElement('p', 'modal-text',  `${street} ${city} ${state} ${postcode}`);
+    const modalAddress = makeElement('p', 'modal-text cap',  `${street} ${city} ${state} ${postcode}`);
     const modalBirthDay = makeElement('p', 'modal-text', birthday.slice(0, 10));
 
     /* set attributes */
@@ -108,10 +122,17 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     modal.appendChild(modalInfoContainer);  
     modalContainer.appendChild(modal); 
 
+    /* Attach an eventlistener to the close button, use event delegation to find the "modal-container" and hide the modal*/
+    closeButton.addEventListener('click', (e) => {
+        e.target.parentNode.parentNode.style.display = 'none';
+    });
+
     /* append it all together to the body */
     body.appendChild(modalContainer);
 }
 
+
+/* When a card is clicked, show the modal that belongs to the card*/
 gallery.addEventListener('click', (e) => {
     const cards = Array.from(document.querySelectorAll('.card'));
     const modals = document.querySelectorAll('.modal-container');
