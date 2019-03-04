@@ -4,6 +4,7 @@ startProject: 3-2-2019
 */
 
 const gallery = document.querySelector('#gallery');
+const searchContainer = document.querySelector('.search-container');
 const body = document.getElementsByTagName('body')[0];
 const url = 'https://randomuser.me/api/?results=12';
 
@@ -134,15 +135,54 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     closeButton.addEventListener('click', (e) => {
         e.target.parentNode.parentNode.style.display = 'none';
     });
+    modalPrevButton.addEventListener('click', (e) => {
+        console.log(e);
+    });
+    modalNextButton.addEventListener('click', (e) => {
+
+    });
+
+
 
     /* append it all together to the body */
     body.appendChild(modalContainer);
 }
 
+const createSearchContainer = () => {
+    const searchForm = makeElement('form', '', null);
+    const searchInput = makeElement('input', 'search-input', null);
+    const formSubmitBtn = makeElement('input', 'search-submit', null);
 
+
+    searchForm.setAttribute('action', '#');
+    searchForm.setAttribute('method', 'get');
+    searchInput.setAttribute('placeholder', 'Search...');
+    searchInput.setAttribute('type', 'search');
+    searchInput.setAttribute('id', 'search-input');
+    formSubmitBtn.innerText = '&#x1F50D';
+    formSubmitBtn.setAttribute('type', 'submit');
+    formSubmitBtn.setAttribute('id', 'search-submit');
+
+    searchForm.appendChild(searchInput);
+    searchForm.appendChild(formSubmitBtn);
+    searchContainer.appendChild(searchForm);
+
+    searchForm.addEventListener('submit', (e) => {
+        const query = document.querySelector('#search-input').value;
+        const cardnames = Array.from(document.querySelectorAll('h3.card-name'));
+        const names = cardnames.map(name => {
+            return name.innerText;
+        }).filter(emp => {
+            if (emp.includes(query)) return emp;
+        });
+
+        console.log(names);
+    });
+}
 /* When a card is clicked, show the modal that belongs to the card*/
 gallery.addEventListener('click', (e) => {
     const cards = Array.from(document.querySelectorAll('.card'));
+
     const modals = document.querySelectorAll('.modal-container');
     for(let i = 0; i < cards.length; i+=1) {
         if(e.target.closest('.card') === cards[i]) {
@@ -152,4 +192,6 @@ gallery.addEventListener('click', (e) => {
   
 });
 
+createSearchContainer();
 fetchdata();
+
