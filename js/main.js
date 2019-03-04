@@ -91,7 +91,6 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     const modalInfoContainer = makeElement('div', 'modal-info-container', null);
     const closeButton = makeElement('button', 'modal-close-btn', 'X');
     const modalImg = makeElement('img', 'modal-img', null);
-
     const modalH3 = makeElement('h3', 'modal-name cap', `${firstname} ${lastname}`);
     const modalMail = makeElement('p', 'modal-text', email);
     const modalCity = makeElement('p', 'modal-text cap', `${city} ${state}`);
@@ -99,13 +98,20 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     const modalPhone = makeElement('p', 'modal-text', phone);
     const modalAddress = makeElement('p', 'modal-text cap',  `${street} ${city} ${state} ${postcode}`);
     const modalBirthDay = makeElement('p', 'modal-text', birthday.slice(0, 10));
-
+    const modalButtonContainer = makeElement('div', 'modal-btn-container', null);
+    const modalPrevButton = makeElement('button', 'modal-prev btn', 'Previous');
+    const modalNextButton = makeElement('button', 'modal-next btn', 'Next');
     /* set attributes */
     closeButton.setAttribute('type', 'button');
     closeButton.setAttribute('id','modal-close-btn');
+    modalPrevButton.setAttribute('type', 'button');
+    modalPrevButton.setAttribute('id', 'modal-prev');
+    modalNextButton.setAttribute('type', 'button');
+    modalNextButton.setAttribute('id', 'modal-next');
     modalImg.setAttribute('src', image);
     modalImg.setAttribute('alt', 'profile picture'); 
     modalH3.setAttribute('id', 'name');
+
     /* Hide modals */
     modalContainer.style.display = 'none';
 
@@ -117,9 +123,11 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     modalInfoContainer.appendChild(modalPhone);
     modalInfoContainer.appendChild(modalAddress);
     modalInfoContainer.appendChild(modalBirthDay);
-
     modal.appendChild(closeButton);
-    modal.appendChild(modalInfoContainer);  
+    modalButtonContainer.appendChild(modalPrevButton);
+    modalButtonContainer.appendChild(modalNextButton);
+    modal.appendChild(modalInfoContainer);
+    modal.appendChild(modalButtonContainer);  
     modalContainer.appendChild(modal); 
 
     /* Attach an eventlistener to the close button, use event delegation to find the "modal-container" and hide the modal*/
