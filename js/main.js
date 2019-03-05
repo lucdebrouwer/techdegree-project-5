@@ -167,16 +167,46 @@ const createSearchContainer = () => {
     searchForm.appendChild(formSubmitBtn);
     searchContainer.appendChild(searchForm);
 
+    // Get search input from user
+    // Loop through cards to find matching name
+    // Hide all old cards
+    // If match is found display the cards that match
+    // Else display no match was found, hide all cards. 
     searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
         const query = document.querySelector('#search-input').value;
-        const cardnames = Array.from(document.querySelectorAll('h3.card-name'));
-        const names = cardnames.map(name => {
-            return name.innerText;
-        }).filter(emp => {
-            if (emp.includes(query)) return emp;
-        });
+        const cards = Array.from(document.querySelectorAll('.card'));
 
-        console.log(names);
+        cards.forEach((card => {
+            const oldcards = card;
+            let employeeName = card.lastElementChild.firstElementChild.textContent;
+            if(employeeName.includes(query)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+            
+        }))
+
+        // const cardnames = Array.from(document.queryS4electorAll('h3.card-name'));
+        // const names = cardnames.map(name => {
+        //     const oldcards = name.parentNode.parentNode;
+        //     const newcards = oldcards.filter(card => {
+        //         if(card.includes(query)) {
+        //             return card.style.display = 'block'; 
+        //         } else {
+        //             return card.style.display = 'none';
+        //         }
+        //     });
+            //return console.log(typeof(name));
+        //     return name.innerText.toLowerCase();
+        // }).filter(emp => {
+        //     if (emp.includes(query.toLowerCase())) {
+        //         return emp;        
+        //     }
+        // });
+
+        //console.log(names);
     });
 }
 /* When a card is clicked, show the modal that belongs to the card*/
