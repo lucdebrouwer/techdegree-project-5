@@ -131,22 +131,42 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     modal.appendChild(modalButtonContainer);  
     modalContainer.appendChild(modal); 
 
-    /* Attach an eventlistener to the close button, use event delegation to find the "modal-container" and hide the modal*/
-    closeButton.addEventListener('click', (e) => {
-        e.target.parentNode.parentNode.style.display = 'none';
-    });
-    modalPrevButton.addEventListener('click', (e) => {
-        console.log(e);
-    });
-    modalNextButton.addEventListener('click', (e) => {
-
-    });
-
-
-
     /* append it all together to the body */
-    body.appendChild(modalContainer);
+    modals.appendChild(modalContainer);
+    body.appendChild(modals);
+    //body.appendChild(modalContainer);
 }
+const modals = makeElement('div', 'modals', '');
+modals.addEventListener('click', (e) => {
+    //Array.from(document.querySelectorAll('.modal-container'));
+    const modalArray = document.querySelectorAll('.modal-container');
+    let count;
+    for(let i = 0; i < modalArray.length; i+=1) {
+        if (modalArray[i].style.display === 'block') {
+            count = i;
+        }
+    }
+    console.log(`count is ${count}`);
+
+    if(e.target.tagName === 'BUTTON' && e.target.innerText === 'X') {
+        e.target.parentNode.parentNode.style.display = 'none';
+    } else if(e.target.tagName === 'BUTTON' && e.target.innerText === 'PREVIOUS') {
+        if(count > 0) {
+            modalArray[count].style.display = 'none';
+            modalArray[count-1].style.display = 'block';
+        } 
+    } else if(e.target.tagName === 'BUTTON' && e.target.innerText === 'NEXT') {
+        if(count > 0) {
+            modalArray[count].style.display = 'none';
+            modalArray[count+1].style.display = 'block';  
+            // console.log(modalArray[count]);
+            // if(modalArray[count] >= 11) {
+            //     modalArray[count] = 0;
+            //     console.log(modalArray[count]);
+            // }
+        } 
+    }
+});
 
 const createSearchContainer = () => {
     const searchForm = makeElement('form', '', null);
@@ -169,7 +189,6 @@ const createSearchContainer = () => {
 
     // Get search input from user
     // Loop through cards to find matching name
-    // Hide all old cards
     // If match is found display the cards that match
     // Else display no match was found, hide all cards. 
     searchForm.addEventListener('submit', (e) => {
@@ -178,35 +197,13 @@ const createSearchContainer = () => {
         const cards = Array.from(document.querySelectorAll('.card'));
 
         cards.forEach((card => {
-            const oldcards = card;
             let employeeName = card.lastElementChild.firstElementChild.textContent;
             if(employeeName.includes(query)) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
-            }
-            
+            }        
         }))
-
-        // const cardnames = Array.from(document.queryS4electorAll('h3.card-name'));
-        // const names = cardnames.map(name => {
-        //     const oldcards = name.parentNode.parentNode;
-        //     const newcards = oldcards.filter(card => {
-        //         if(card.includes(query)) {
-        //             return card.style.display = 'block'; 
-        //         } else {
-        //             return card.style.display = 'none';
-        //         }
-        //     });
-            //return console.log(typeof(name));
-        //     return name.innerText.toLowerCase();
-        // }).filter(emp => {
-        //     if (emp.includes(query.toLowerCase())) {
-        //         return emp;        
-        //     }
-        // });
-
-        //console.log(names);
     });
 }
 /* When a card is clicked, show the modal that belongs to the card*/

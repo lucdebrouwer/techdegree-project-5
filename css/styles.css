@@ -125,6 +125,9 @@ header h1 {
     text-transform: capitalize;
 }
 
+.search-text {
+    color: white;
+}
 
 /* ===================================== 
    Modal
