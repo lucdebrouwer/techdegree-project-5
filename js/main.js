@@ -137,36 +137,7 @@ const createModals = (image, firstname, lastname, email, birthday, street, phone
     //body.appendChild(modalContainer);
 }
 const modals = makeElement('div', 'modals', '');
-modals.addEventListener('click', (e) => {
-    //Array.from(document.querySelectorAll('.modal-container'));
-    const modalArray = document.querySelectorAll('.modal-container');
-    let count;
-    for(let i = 0; i < modalArray.length; i+=1) {
-        if (modalArray[i].style.display === 'block') {
-            count = i;
-        }
-    }
-    console.log(`count is ${count}`);
 
-    if(e.target.tagName === 'BUTTON' && e.target.innerText === 'X') {
-        e.target.parentNode.parentNode.style.display = 'none';
-    } else if(e.target.tagName === 'BUTTON' && e.target.innerText === 'PREVIOUS') {
-        if(count > 0) {
-            modalArray[count].style.display = 'none';
-            modalArray[count-1].style.display = 'block';
-        } 
-    } else if(e.target.tagName === 'BUTTON' && e.target.innerText === 'NEXT') {
-        if(count > 0) {
-            modalArray[count].style.display = 'none';
-            modalArray[count+1].style.display = 'block';  
-            // console.log(modalArray[count]);
-            // if(modalArray[count] >= 11) {
-            //     modalArray[count] = 0;
-            //     console.log(modalArray[count]);
-            // }
-        } 
-    }
-});
 
 const createSearchContainer = () => {
     const searchForm = makeElement('form', '', null);
@@ -218,7 +189,40 @@ gallery.addEventListener('click', (e) => {
     }
   
 });
+modals.addEventListener('click', (e) => {
+    const modalArray = document.querySelectorAll('.modal-container');
+    let arrLength = modalArray.length; 
+    let count;
+    
+    //console.log(`count before loop is ${count}`);
+    for(let i = 0; i < modalArray.length; i+=1) {
+        if (modalArray[i].style.display === 'block') {
 
+        }
+    }
+    //console.log(`count after loop is: ${count}`);
+    if(e.target.tagName === 'BUTTON' && e.target.innerText === 'X') {
+        // Close the modal
+        e.target.parentNode.parentNode.style.display = 'none';
+
+    } else if (e.target.tagName === 'BUTTON' && e.target.innerText === 'PREVIOUS') {
+        // Find the previous modal
+        // Hide old modals
+        // Set previous modal to display
+        let prevModal = modalArray[(count+arrLength-1)%arrLength];
+        modalArray[count].style.display = 'none';
+        prevModal.style.display = 'block';
+    } else if (e.target.tagName === 'BUTTON' && e.target.innerText === 'NEXT') {
+        // Hide old modals
+        // Find the previous modal
+        // Find the next modal
+        // Set next modal to display
+        modalArray[count].style.display = 'none';
+        let prevModal = modalArray[(count+arrLength-1)%arrLength];
+        let nextModal = modalArray[(count+1)%arrLength];
+        nextModal.style.display = 'block';
+    }
+});
 createSearchContainer();
 fetchdata();
 
