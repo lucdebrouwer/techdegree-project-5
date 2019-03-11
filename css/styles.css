@@ -18,7 +18,7 @@ body {
     text-align: center;
     /*background: rgba(235, 235, 235, 0.9);*/
     /*background: #372549;*/
-    background: #1A1423;
+    background: #58BC82;
 }
 
 header {
@@ -33,7 +33,7 @@ header {
 header h1 {
     font-size: 1.25em;
     /*color: rgba(50, 50, 50, 0.9);*/
-    color: #AA4586;
+    color: #254441;
     margin-top: 35px;
 }
 
@@ -91,7 +91,7 @@ header h1 {
     margin: 10px 10px 20px;
     padding: 10px;
     /*background: rgba(245, 245, 245, 0.9);*/
-    background: #372549;
+    background: #8AEA92;
     border-radius: 0.25em;
     border: 1px solid rgba(50, 50, 50, 0.3);
     transition: .4s ease-out;
@@ -116,7 +116,7 @@ header h1 {
 .card-text {
     font-size: 0.9em;
     /*color: rgba(50, 50, 50, 0.7);*/
-    color: #EACDC2;
+    color: #254441;
     margin: 7px auto;
     transition: .4s ease-out;
 }

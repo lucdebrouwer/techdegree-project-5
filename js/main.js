@@ -6,7 +6,7 @@ startProject: 3-2-2019
 const gallery = document.querySelector('#gallery');
 const searchContainer = document.querySelector('.search-container');
 const body = document.getElementsByTagName('body')[0];
-const url = 'https://randomuser.me/api/?results=12';
+const url = 'https://randomuser.me/api/?results=12&nat=us';
 
 // Fetch the random users from the random user api 
 // Calls createCards and createModals to build the necessary content
@@ -144,7 +144,6 @@ const createSearchContainer = () => {
     const searchInput = makeElement('input', 'search-input', null);
     const formSubmitBtn = makeElement('input', 'search-submit', null);
 
-
     searchForm.setAttribute('action', '#');
     searchForm.setAttribute('method', 'get');
     searchInput.setAttribute('placeholder', 'Search...');
@@ -164,7 +163,7 @@ const createSearchContainer = () => {
     // Else display no match was found, hide all cards. 
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const query = document.querySelector('#search-input').value;
+        const query = document.querySelector('#search-input').value.toLowerCase();
         const cards = Array.from(document.querySelectorAll('.card'));
 
         cards.forEach((card => {
@@ -193,14 +192,12 @@ modals.addEventListener('click', (e) => {
     const modalArray = document.querySelectorAll('.modal-container');
     let arrLength = modalArray.length; 
     let count;
-    
-    //console.log(`count before loop is ${count}`);
     for(let i = 0; i < modalArray.length; i+=1) {
         if (modalArray[i].style.display === 'block') {
 
         }
     }
-    //console.log(`count after loop is: ${count}`);
+
     if(e.target.tagName === 'BUTTON' && e.target.innerText === 'X') {
         // Close the modal
         e.target.parentNode.parentNode.style.display = 'none';
