@@ -194,7 +194,7 @@ modals.addEventListener('click', (e) => {
     let count;
     for(let i = 0; i < modalArray.length; i+=1) {
         if (modalArray[i].style.display === 'block') {
-
+            count = i;
         }
     }
 
@@ -217,6 +217,7 @@ modals.addEventListener('click', (e) => {
         modalArray[count].style.display = 'none';
         let prevModal = modalArray[(count+arrLength-1)%arrLength];
         let nextModal = modalArray[(count+1)%arrLength];
+        prevModal.style.display = 'none';
         nextModal.style.display = 'block';
     }
 });
